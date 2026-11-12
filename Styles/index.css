@@ -23,8 +23,14 @@ h2 span, h1 span { color: var(--gold); text-shadow: 0 0 16px color-mix(in srgb, 
 
 header { position: sticky; top: 0; z-index: 20; background: rgba(6,7,20,.88); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); box-shadow: 0 1px 0 color-mix(in srgb, var(--gold) 25%, transparent); }
 header .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
-.brand { font-family: var(--serif); font-size: 1.3rem; font-weight: 800; letter-spacing: .08em; }
+.brand { font-family: var(--serif); font-size: 1.3rem; font-weight: 800; letter-spacing: .08em; white-space: nowrap; }
 .brand small { font: 700 .6rem var(--sans); letter-spacing: .3em; color: var(--blue); margin-left: 10px; }
+.brand .brand-short { display: none; }
+@media (max-width: 640px) {
+  .brand { font-size: 1.05rem; }
+  .brand .brand-full { display: none; }
+  .brand .brand-short { display: inline; }
+}
 nav { display: flex; gap: 26px; font-size: .92rem; font-weight: 600; color: var(--muted); }
 nav a:hover { color: var(--gold-2); }
 
