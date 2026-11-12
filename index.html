@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#060714">
-  <meta name="description" content="Gamebox Videojuegos Manizales, Colombia. Consolas, videojuegos y servicio técnico.">
+  <meta name="description" content="Gamebox Videojuegos Manizales, Colombia. Consolas, videojuegos, accesorios y servicio técnico.">
   <title>Gamebox Videojuegos Manizales | Colombia</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,9 +14,10 @@
 <body>
   <header>
     <div class="wrap">
-      <a class="brand" href="#inicio"><span class="brand-full">GAMEBOX VIDEOJUEGOS MANIZALES</span><span class="brand-short">GAMEBOX</span><small>TECH</small></a>
+      <a class="brand" href="index.html"><span class="brand-full">GAMEBOX VIDEOJUEGOS MANIZALES</span><span class="brand-short">GAMEBOX</span><small>TECH</small></a>
       <nav aria-label="Navegación principal">
-        <a href="#colecciones">Colecciones</a>
+        <a href="index.html" aria-current="page">Inicio</a>
+        <a href="catalogo.html">Catálogo</a>
         <a href="mantenimiento.html">Mantenimiento</a>
         <a href="#visitanos" class="nav-hide-mobile">Visítanos</a>
       </nav>
@@ -25,15 +26,26 @@
 
   <main id="inicio">
     <section class="hero wrap">
-      <p class="eyebrow">CONSOLAS · JUEGOS · SERVICIO TÉCNICO</p>
+      <p class="eyebrow">CONSOLAS · JUEGOS · ACCESORIOS · SERVICIO TÉCNICO</p>
       <h1><span class="plain" data-s="hero_title_1">Juego de nivel,</span><br><span data-s="hero_title_2">con respaldo técnico.</span></h1>
       <p data-s="hero_text">Consolas, videojuegos y servicio técnico especializado: todo lo que necesitas para jugar, en un solo lugar y con atención de confianza.</p>
-      <a class="btn solid" href="#colecciones">Ver colecciones</a>
+      <a class="btn solid" href="catalogo.html">Ver catálogo</a>
       <a class="btn" id="wa-hero" href="#visitanos">Escríbenos</a>
     </section>
 
-    <section id="colecciones" class="wrap" aria-label="Colecciones">
-      <div class="blocks" id="blocks"><p class="empty">Cargando colecciones…</p></div>
+    <section id="horario" class="wrap pad" aria-label="Horario y servicios">
+      <div class="info-grid">
+        <div class="info-card">
+          <p class="eyebrow">HORARIO</p>
+          <h2>Cuándo estamos<span>.</span></h2>
+          <p data-s="horario">Lunes a sábado, 9:00 a.m. – 7:00 p.m.</p>
+        </div>
+        <div class="info-card">
+          <p class="eyebrow">SERVICIOS</p>
+          <h2>Qué ofrecemos<span>.</span></h2>
+          <p data-s="servicios_text">Venta de consolas, videojuegos y accesorios, además de servicio técnico y mantenimiento especializado.</p>
+        </div>
+      </div>
     </section>
 
     <section id="visitanos" class="wrap pad">
@@ -42,10 +54,11 @@
           <p class="eyebrow">VISÍTANOS</p>
           <h2>Te esperamos<span>.</span></h2>
           <p data-s="visit_text">Visítanos o escríbenos por WhatsApp para consultar disponibilidad, precios o agendar la revisión de tu consola.</p>
+          <p class="visit-address" data-s="address">Parque Caldas, Manizales</p>
         </div>
         <div class="links">
           <a id="wa-link" class="btn solid" target="_blank" rel="noopener noreferrer" href="#">WhatsApp ↗</a>
-          <a class="btn" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps">Google Maps ↗</a>
+          <a class="btn" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=Parque+Caldas%2C+Manizales">Google Maps ↗</a>
         </div>
       </div>
     </section>
@@ -53,7 +66,7 @@
 
   <footer>
     <div class="wrap">
-      <a class="brand" href="#inicio">GAMEBOX VIDEOJUEGOS MANIZALES</a>
+      <a class="brand" href="index.html">GAMEBOX VIDEOJUEGOS MANIZALES</a>
       <p>Colombia · Consolas, videojuegos y servicio técnico.</p>
       <p>&copy; <span id="year"></span> Gamebox Videojuegos Manizales. Todos los derechos reservados.</p>
       <a class="admin-link" href="admin.html">Acceso administrativo</a>

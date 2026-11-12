@@ -999,6 +999,9 @@ $("exp-period").addEventListener("change", renderExpenses);
 // =====================================================================
 const DEFAULTS = {"hero_title_1": "Juego de nivel,", "hero_title_2": "con respaldo técnico.", "hero_text": "Consolas, videojuegos y servicio técnico especializado: todo lo que necesitas para jugar, en un solo lugar y con atención de confianza.", "visit_text": "Visítanos o escríbenos por WhatsApp para consultar disponibilidad, precios o agendar la revisión de tu consola."};
 DEFAULTS.whatsapp = WHATSAPP;
+DEFAULTS.horario = "Lunes a sábado, 9:00 a.m. – 7:00 p.m.";
+DEFAULTS.servicios_text = "Venta de consolas, videojuegos y accesorios, además de servicio técnico y mantenimiento especializado.";
+DEFAULTS.address = "Parque Caldas, Manizales";
 DEFAULTS.color_gold = "#28e0ff";
 DEFAULTS.color_blue = "#ff3fa4";
 DEFAULTS.color_green = "#7dff4d";

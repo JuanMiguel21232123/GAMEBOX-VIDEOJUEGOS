@@ -33,6 +33,16 @@ header .wrap { display: flex; align-items: center; justify-content: space-betwee
 }
 nav { display: flex; gap: 26px; font-size: .92rem; font-weight: 600; color: var(--muted); }
 nav a:hover { color: var(--gold-2); }
+nav a[aria-current="page"] { color: var(--gold-2); }
+
+/* Horario y servicios (Inicio) */
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; padding: 10px 0 70px; }
+.info-card { padding: 30px 28px; background: var(--surface); border: 1px solid var(--line); border-top: 2px solid var(--gold); }
+.info-card h2 { font-size: 1.6rem; }
+.info-card p:not(.eyebrow) { color: var(--muted); font-size: 1rem; font-weight: 500; }
+@media (max-width: 760px) { .info-grid { grid-template-columns: 1fr; } }
+
+.visit-address { margin-top: 14px; font-weight: 600; color: var(--gold-2); letter-spacing: .02em; }
 
 .hero { padding: clamp(70px, 12vw, 140px) 0 clamp(50px, 8vw, 90px); text-align: center; }
 .hero h1 { font-size: clamp(2.3rem, 7vw, 4.4rem); margin: 18px 0 20px; }
