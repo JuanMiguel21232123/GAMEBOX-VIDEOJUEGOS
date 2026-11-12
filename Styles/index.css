@@ -81,7 +81,7 @@ footer .brand { display: block; margin-bottom: 8px; color: var(--text); }
   .visit { grid-template-columns: 1fr; padding: 30px 24px; } .visit .links { justify-content: flex-start; }
   nav { gap: 16px; } .brand small { display: none; }
 }
-@media (max-width: 520px) { nav a:nth-child(3) { display: none; } .hero .btn + .btn { margin: 12px 0 0; } }
+@media (max-width: 520px) { .nav-hide-mobile { display: none; } .hero .btn + .btn { margin: 12px 0 0; } }
 
 footer .admin-link { display: inline-block; margin-top: 14px; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); opacity: .7; transition: .2s; }
 footer .admin-link:hover { color: var(--gold-2); opacity: 1; }
