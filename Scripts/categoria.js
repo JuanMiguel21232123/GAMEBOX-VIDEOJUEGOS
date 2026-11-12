@@ -14,6 +14,12 @@ function setupHeader() {
 
 const optionsWord = (n) => (n === 1 ? "opción" : "opciones");
 
+function stockLabel(p, vid) {
+  const v = variantsOf(p).find((o) => String(o.id) === String(vid)) || null;
+  const s = stockOf(p, v);
+  return s != null && s > 0 ? `Quedan ${s}` : "";
+}
+
 function priceLabel(p, vid) {
   const opts = variantsOf(p);
   if (!opts.length) return money(p.price);
@@ -35,7 +41,7 @@ function card(p) {
       <label for="v-${p.id}">${esc(INFO.variant)}</label>
       <select id="v-${p.id}" class="variant">
         <option value="">Selecciona ${esc(INFO.variant.toLowerCase())}</option>
-        ${opts.map((o) => `<option value="${o.id}"${o.sold_out ? " disabled" : ""}>${esc(o.name)}${o.price != null && o.price !== p.price ? " · " + money(o.price) : ""}${o.sold_out ? " · Agotado" : ""}</option>`).join("")}
+        ${opts.map((o) => `<option value="${o.id}"${o.sold_out ? " disabled" : ""}>${esc(o.name)}${o.price != null && o.price !== p.price ? " · " + money(o.price) : ""}${o.sold_out ? " · Agotado" : (o.stock != null ? ` · quedan ${o.stock}` : "")}</option>`).join("")}
       </select>
     </div>` : "";
   return `
@@ -46,6 +52,7 @@ function card(p) {
         <p class="desc">${esc(p.description)}</p>
         ${select}
         <span class="price">${priceLabel(p, null)}</span>
+        <span class="stock-left">${stockLabel(p, null)}</span>
         ${out ? `<button class="add" type="button" disabled>Agotado</button>` : `<button class="add" type="button">Agregar al pedido</button>`}
       </div>
     </article>`;
@@ -113,6 +120,7 @@ $("#products").addEventListener("change", (e) => {
   sel.classList.remove("invalid");
   const c = sel.closest(".card"), p = products.find((x) => String(x.id) === c.dataset.id);
   c.querySelector(".price").textContent = priceLabel(p, sel.value);
+  c.querySelector(".stock-left").textContent = stockLabel(p, sel.value);
 });
 
 $("#products").addEventListener("click", (e) => {

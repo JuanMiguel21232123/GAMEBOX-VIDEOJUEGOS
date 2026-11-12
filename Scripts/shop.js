@@ -75,6 +75,9 @@ let products = []; // cada producto trae product_variants (solo las activas)
 const variantsOf = (p) => (p.product_variants || []).filter((v) => v.active);
 const unitPrice = (p, v) => (v && v.price != null ? v.price : p.price);
 const soldOut = (p) => { const o = variantsOf(p); return o.length ? o.every((v) => v.sold_out) : !!p.sold_out; };
+// Existencias a mostrar: las de la variante elegida, o las del producto si no tiene variantes.
+// null = sin control de inventario (no se muestra nada).
+const stockOf = (p, v) => (v ? v.stock : (variantsOf(p).length ? null : p.stock));
 
 // ---------- Mi pedido (carrito) ----------
 const MAX_QTY = 20;

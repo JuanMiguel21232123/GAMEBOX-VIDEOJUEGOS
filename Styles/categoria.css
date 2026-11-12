@@ -22,6 +22,8 @@ body { --accent: var(--gold); }
 .card { transition: border-color .25s, transform .25s; }
 .card:hover { border-color: color-mix(in srgb, var(--accent) 60%, transparent); box-shadow: 0 0 24px -10px var(--accent); }
 .card .meta { font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-top: 4px; }
+.card .stock-left { display: block; font-size: .78rem; color: var(--muted); margin-top: 2px; }
+.card .stock-left:empty { display: none; }
 .variant-field { display: flex; flex-direction: column; gap: 5px; margin-top: 6px; }
 .variant-field label { font-size: .76rem; letter-spacing: .04em; color: var(--muted); font-weight: 600; }
 .variant-field select { width: 100%; padding: 10px 12px; background: #060714; border: 1px solid var(--line); color: var(--text); font: inherit; font-size: .92rem; border-radius: 0; }
