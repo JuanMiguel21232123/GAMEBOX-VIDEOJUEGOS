@@ -280,7 +280,9 @@ async function deleteOrder(request, env, id) {
     const { rows: items } = await turso(env, "SELECT product_id, variant_id, name, variant_name, quantity FROM order_items WHERE order_id = ?", [id]);
     await adjustStock(env, items, 1);
   }
-  await turso(env, "DELETE FROM orders WHERE id = ?", [id]); // order_items se borra en cascada
+  // Turso no aplica ON DELETE CASCADE por defecto, así que borramos las líneas del pedido a mano.
+  await turso(env, "DELETE FROM order_items WHERE order_id = ?", [id]);
+  await turso(env, "DELETE FROM orders WHERE id = ?", [id]);
   return json({ ok: true });
 }
 
@@ -490,7 +492,11 @@ async function deleteProduct(request, env, id) {
   if (!(await requireAdmin(request, env))) return err("auth", 401);
   const { rows } = await turso(env, "SELECT image_url FROM products WHERE id = ?", [id]);
   if (rows[0]?.image_url) await deleteImageByUrl(env, rows[0].image_url);
-  await turso(env, "DELETE FROM products WHERE id = ?", [id]); // variantes en cascada; pedidos conservan nombre/precio (SET NULL)
+  // Turso no aplica ON DELETE CASCADE por defecto (hace falta PRAGMA foreign_keys = ON en cada conexión),
+  // así que borramos las variantes a mano para no dejar filas huérfanas en product_variants.
+  await turso(env, "DELETE FROM product_variants WHERE product_id = ?", [id]);
+  await turso(env, "UPDATE order_items SET product_id = NULL WHERE product_id = ?", [id]); // pedidos conservan nombre/precio
+  await turso(env, "DELETE FROM products WHERE id = ?", [id]);
   return json({ ok: true });
 }
 
