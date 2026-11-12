@@ -1,6 +1,17 @@
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const money = (n) => new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 }).format(n);
+// Versión corta para tarjetas de resumen (Ganancias, Gastos): $ 15,2 M en vez de $ 15.234.567.
+// El valor exacto se deja en el atributo title (aparece al pasar el mouse).
+function moneyShort(n) {
+  const abs = Math.abs(n);
+  if (abs < 1_000_000) return money(n);
+  const sign = n < 0 ? "-" : "";
+  const millions = abs / 1_000_000;
+  const digits = millions >= 100 ? 0 : 1;
+  return `${sign}$ ${millions.toLocaleString("es-CO", { minimumFractionDigits: digits, maximumFractionDigits: digits })} M`;
+}
+const setMoneyShort = (el, n) => { el.textContent = moneyShort(n); el.title = money(n); };
 
 async function api(path, opts = {}) {
   const isBinary = opts.body instanceof ArrayBuffer || opts.body instanceof Blob;
@@ -240,13 +251,13 @@ function renderEarnings() {
   const from = periodStart($("earn-period").value);
   const done = orders.filter((o) => o.status === "delivered" && new Date(o.status_at) >= from);
   const total = done.reduce((t, o) => t + o.total, 0);
-  $("earn-total").textContent = money(total);
+  setMoneyShort($("earn-total"), total);
   $("earn-count").textContent = done.length;
-  $("earn-avg").textContent = money(done.length ? Math.round(total / done.length) : 0);
+  setMoneyShort($("earn-avg"), done.length ? Math.round(total / done.length) : 0);
   const spent = expenses.filter((e) => expenseDate(e) >= from).reduce((t, e) => t + e.amount, 0);
   const balance = total - spent;
-  $("earn-expenses").textContent = money(spent);
-  $("earn-balance").textContent = money(balance);
+  setMoneyShort($("earn-expenses"), spent);
+  setMoneyShort($("earn-balance"), balance);
   $("earn-balance").style.color = balance < 0 ? "var(--red)" : "";
 
   const by = {};
@@ -256,7 +267,7 @@ function renderEarnings() {
     <div class="bar-row">
       <span>${esc(CATS[k] || "Otros")}</span>
       <div class="bar"><i class="bar-${accentOf(k)}" style="width:${total ? Math.max(3, Math.round((v / total) * 100)) : 0}%"></i></div>
-      <strong>${money(v)}</strong>
+      <strong title="${esc(money(v))}">${moneyShort(v)}</strong>
     </div>`).join("") : `<p class="empty">Todavía no hay pedidos entregados en este periodo.</p>`;
 }
 $("earn-period").addEventListener("change", renderEarnings);
@@ -947,9 +958,9 @@ function renderExpenses() {
   const from = periodStart($("exp-period").value);
   const rows = expenses.filter((e) => expenseDate(e) >= from);
   const total = rows.reduce((t, e) => t + e.amount, 0);
-  $("exp-total").textContent = money(total);
+  setMoneyShort($("exp-total"), total);
   $("exp-count").textContent = rows.length;
-  $("exp-avg").textContent = money(rows.length ? Math.round(total / rows.length) : 0);
+  setMoneyShort($("exp-avg"), rows.length ? Math.round(total / rows.length) : 0);
   $("expenses-empty").hidden = rows.length > 0;
   $("expenses-table").hidden = !rows.length;
   $("expenses-body").innerHTML = rows.map((e) => `<tr>

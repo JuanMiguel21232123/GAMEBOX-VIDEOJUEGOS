@@ -66,7 +66,7 @@ textarea { resize: vertical; }
 .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 24px; }
 .stat { padding: 18px 20px; background: var(--surface); border: 1px solid var(--line); border-top: 2px solid var(--line); min-width: 0; }
 .stat span { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
-.stat strong { display: block; font: 700 2.1rem var(--serif); font-size: clamp(1.25rem, 1.1rem + 1.1vw, 2.1rem); overflow-wrap: anywhere; }
+.stat strong { display: block; font: 700 2.1rem var(--serif); font-size: clamp(1.25rem, 1.1rem + 1.1vw, 2.1rem); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .s-green { border-top-color: var(--green); } .s-blue { border-top-color: var(--blue); } .s-gold { border-top-color: var(--gold); }
 
 .panel { padding: 28px; margin-bottom: 24px; }
@@ -124,7 +124,6 @@ td { padding: 14px 12px; border-bottom: 1px solid var(--line); vertical-align: m
 .orders-list { display: grid; gap: 14px; }
 .order-card { padding: 18px 20px; border: 1px solid var(--line); background: #0a0c1e; display: grid; gap: 12px; }
 .order-top, .order-bottom { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-.order-total { overflow-wrap: anywhere; }
 .order-code { font: 700 1.2rem var(--serif); letter-spacing: .06em; color: var(--gold-2); }
 .order-customer { display: flex; gap: 14px; align-items: baseline; flex-wrap: wrap; }
 .order-customer a { color: var(--green); font-size: .88rem; }
@@ -133,7 +132,7 @@ td { padding: 14px 12px; border-bottom: 1px solid var(--line); vertical-align: m
 .order-items li { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); }
 .order-items li span:last-child { color: var(--text); }
 .order-notes { font-size: .85rem; color: var(--muted); font-style: italic; }
-.order-total { font: 700 1.5rem var(--serif); }
+.order-total { flex: 0 1 auto; min-width: 0; font: 700 1.5rem var(--serif); font-size: clamp(1.05rem, .85rem + 1.2vw, 1.5rem); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .st-pending { color: var(--gold-2); } .st-confirmed { color: var(--blue); } .st-delivered { color: var(--green); } .st-cancelled { color: var(--muted); }
 .row-actions button.ok:hover { border-color: var(--green); color: var(--green); }
 
@@ -144,7 +143,7 @@ td { padding: 14px 12px; border-bottom: 1px solid var(--line); vertical-align: m
 .bars { display: grid; gap: 12px; margin-bottom: 18px; }
 .bar-row { display: grid; grid-template-columns: 110px 1fr minmax(0, 130px); gap: 14px; align-items: center; font-size: .9rem; }
 .bar-row > * { min-width: 0; }
-.bar-row strong { text-align: right; overflow-wrap: anywhere; }
+.bar-row strong { text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default; }
 .bar { height: 10px; background: #060714; border: 1px solid var(--line); }
 .bar i { display: block; height: 100%; background: var(--gold); }
 .bar .bar-green { background: var(--green); } .bar .bar-blue { background: var(--blue); } .bar .bar-gold { background: var(--gold); }
@@ -198,8 +197,9 @@ input[type="color"] { height: 46px; padding: 4px; cursor: pointer; }
 .sale-row .s-qty { flex: 0 0 80px; width: 80px; }
 .sale-row .s-price { flex: 0 0 140px; width: 140px; }
 .sale-row select.invalid, .sale-row input.invalid { border-color: var(--red); }
-.sale-total { display: flex; flex-wrap: wrap; gap: 6px 14px; justify-content: space-between; align-items: baseline; margin: 20px 0 16px; padding-top: 14px; border-top: 1px solid var(--line); }
-.sale-total strong { font: 700 1.8rem var(--serif); color: var(--gold-2); overflow-wrap: anywhere; }
+.sale-total { display: flex; gap: 14px; justify-content: space-between; align-items: baseline; margin: 20px 0 16px; padding-top: 14px; border-top: 1px solid var(--line); }
+.sale-total span { flex: 0 0 auto; }
+.sale-total strong { flex: 0 1 auto; min-width: 0; font: 700 1.8rem var(--serif); font-size: clamp(1.15rem, 1rem + 1.6vw, 1.8rem); color: var(--gold-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* ---------- Entrega y pago en pedidos ---------- */
 .order-delivery { font-size: .88rem; }
