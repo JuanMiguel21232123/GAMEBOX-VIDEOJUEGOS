@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#060714">
+  <meta name="description" content="Game Zone, Colombia. Consolas, videojuegos y servicio técnico.">
+  <title>Game Zone | Colombia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Styles/index.css">
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a class="brand" href="#inicio">GAME ZONE<small>TECH</small></a>
+      <nav aria-label="Navegación principal">
+        <a href="#colecciones">Colecciones</a>
+        <a href="#visitanos">Visítanos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <section class="hero wrap">
+      <p class="eyebrow">CONSOLAS · JUEGOS · SERVICIO TÉCNICO</p>
+      <h1><span class="plain" data-s="hero_title_1">Juego de nivel,</span><br><span data-s="hero_title_2">con respaldo técnico.</span></h1>
+      <p data-s="hero_text">Consolas, videojuegos y servicio técnico especializado: todo lo que necesitas para jugar, en un solo lugar y con atención de confianza.</p>
+      <a class="btn solid" href="#colecciones">Ver colecciones</a>
+      <a class="btn" id="wa-hero" href="#visitanos">Escríbenos</a>
+    </section>
+
+    <section id="colecciones" class="wrap" aria-label="Colecciones">
+      <div class="blocks" id="blocks"><p class="empty">Cargando colecciones…</p></div>
+    </section>
+
+    <section id="visitanos" class="wrap pad">
+      <div class="visit">
+        <div>
+          <p class="eyebrow">VISÍTANOS</p>
+          <h2>Te esperamos<span>.</span></h2>
+          <p data-s="visit_text">Visítanos o escríbenos por WhatsApp para consultar disponibilidad, precios o agendar la revisión de tu consola.</p>
+        </div>
+        <div class="links">
+          <a id="wa-link" class="btn solid" target="_blank" rel="noopener noreferrer" href="#">WhatsApp ↗</a>
+          <a class="btn" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps">Google Maps ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <a class="brand" href="#inicio">GAME ZONE</a>
+      <p>Colombia · Consolas, videojuegos y servicio técnico.</p>
+      <p>&copy; <span id="year"></span> Game Zone. Todos los derechos reservados.</p>
+      <a class="admin-link" href="admin.html">Acceso administrativo</a>
+    </div>
+  </footer>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/shop.js"></script>
+  <script src="Scripts/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+/* Página de colección (se carga junto con index.css) */
+body[data-accent="green"] { --accent: var(--green); }
+body[data-accent="blue"] { --accent: var(--blue); }
+body[data-accent="gold"] { --accent: var(--gold); }
+body { --accent: var(--gold); }
+
+.cat-hero { padding: clamp(44px, 8vw, 80px) 0 20px; }
+.cat-hero .back { display: inline-block; margin-bottom: 26px; font-size: .84rem; font-weight: 600; letter-spacing: .08em; color: var(--muted); transition: .2s; }
+.cat-hero .back:hover { color: var(--accent); }
+.cat-hero .eyebrow { color: var(--accent); text-shadow: 0 0 10px color-mix(in srgb, var(--accent) 55%, transparent); }
+.cat-hero h1 { font-size: clamp(2.3rem, 7vw, 4rem); margin: 12px 0 18px; padding-bottom: 18px; position: relative; }
+.cat-hero h1::after { content: ""; position: absolute; left: 0; bottom: 0; width: 64px; height: 3px; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+.cat-hero p#cat-text { max-width: 640px; color: var(--muted); font-size: 1.05rem; font-weight: 500; }
+
+.cat-body { padding-bottom: 90px; }
+.cat-switch { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 24px; }
+.cat-switch .tab { display: inline-block; }
+.cat-switch .tab[aria-current="true"] { border-color: var(--accent); color: var(--text); background: color-mix(in srgb, var(--accent) 14%, transparent); }
+
+.search { max-width: 360px; margin-bottom: 26px; }
+
+.card { transition: border-color .25s, transform .25s; }
+.card:hover { border-color: color-mix(in srgb, var(--accent) 60%, transparent); box-shadow: 0 0 24px -10px var(--accent); }
+.card .meta { font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-top: 4px; }
+.variant-field { display: flex; flex-direction: column; gap: 5px; margin-top: 6px; }
+.variant-field label { font-size: .76rem; letter-spacing: .04em; color: var(--muted); font-weight: 600; }
+.variant-field select { width: 100%; padding: 10px 12px; background: #060714; border: 1px solid var(--line); color: var(--text); font: inherit; font-size: .92rem; border-radius: 0; }
+.variant-field select:focus { outline: none; border-color: var(--accent); }
+.variant-field select.invalid { border-color: var(--blue); }
+.card button.add:hover { border-color: var(--accent); color: var(--accent); }
+
+.card.soldout .img { opacity: .4; }
+.card.soldout .price { color: var(--muted); }
+.card button.add:disabled { opacity: .55; cursor: not-allowed; }
+.card button.add:disabled:hover { border-color: var(--line); color: var(--muted); }
+
+/* Subsecciones de la colección */
+.sub-switch { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 24px; }
+.sub-chip { padding: 8px 18px; border: 1px solid var(--line); border-radius: 2px; background: none; color: var(--muted); font: 600 .86rem var(--sans); cursor: pointer; transition: .2s; }
+.sub-chip:hover { color: var(--text); }
+.sub-chip[aria-pressed="true"] { border-color: var(--accent); color: var(--text); background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.group-title { grid-column: 1 / -1; margin-top: 18px; padding-bottom: 8px; border-bottom: 1px solid var(--line); font: 700 1.5rem var(--serif); text-transform: uppercase; }
+.group-title::before { content: ""; display: inline-block; width: 22px; height: 3px; margin-right: 12px; vertical-align: middle; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+.group-title:first-child { margin-top: 0; }
