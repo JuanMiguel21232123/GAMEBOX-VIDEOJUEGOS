@@ -112,8 +112,9 @@ h1 span.plain { color: inherit; text-shadow: none; }
 .cart-items { display: grid; gap: 12px; margin-bottom: 20px; }
 .cart-empty { color: var(--muted); text-align: center; padding: 30px 0; }
 .cart-line { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
-.cart-line strong { font: 600 1.05rem var(--sans); }
-.cart-line .line-price { color: var(--gold-2); font-weight: 700; text-align: right; }
+.cart-line > div { min-width: 0; }
+.cart-line strong { font: 600 1.05rem var(--sans); overflow-wrap: anywhere; }
+.cart-line .line-price { color: var(--gold-2); font-weight: 700; text-align: right; overflow-wrap: anywhere; }
 .cart-line .line-variant { display: block; font-size: .8rem; color: var(--muted); }
 .qty { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: .85rem; }
 .qty button { width: 28px; height: 28px; background: none; border: 1px solid var(--line); color: var(--text); cursor: pointer; }
@@ -125,8 +126,8 @@ h1 span.plain { color: inherit; text-shadow: none; }
 .field input, .field textarea { width: 100%; padding: 11px 13px; background: #060714; border: 1px solid var(--line); color: var(--text); font: inherit; border-radius: 0; }
 .field input:focus, .field textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 1px color-mix(in srgb, var(--gold) 50%, transparent); }
 .field textarea { resize: vertical; }
-.cart-total { display: flex; justify-content: space-between; align-items: baseline; padding-top: 6px; color: var(--muted); }
-.cart-total strong { font: 700 1.6rem var(--serif); color: var(--gold-2); }
+.cart-total { display: flex; flex-wrap: wrap; gap: 4px 14px; justify-content: space-between; align-items: baseline; padding-top: 6px; color: var(--muted); }
+.cart-total strong { font: 700 1.6rem var(--serif); color: var(--gold-2); overflow-wrap: anywhere; }
 .btn.full { width: 100%; text-align: center; }
 .btn:disabled { opacity: .5; cursor: not-allowed; }
 .form-msg { min-height: 1.2em; font-size: .88rem; color: var(--muted); }
