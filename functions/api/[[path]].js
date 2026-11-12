@@ -169,6 +169,13 @@ async function createOrder(request, env) {
     lines.push({ product_id: p.id, variant_id: it.variant_id || null, name: p.name, category: p.category, variant_name: variantName, price, qty });
   }
 
+  try {
+    await checkStock(env, lines.map((l) => ({ product_id: l.product_id, variant_id: l.variant_id, name: l.name, variant_name: l.variant_name, quantity: l.qty })));
+  } catch (e) {
+    if (e instanceof StockError) return err(`stock:${e.itemName}`);
+    throw e;
+  }
+
   const { rows: pending } = await turso(env, "SELECT COUNT(*) AS n FROM orders WHERE customer_phone = ? AND status = 'pending'", [phone]);
   if ((pending[0]?.n || 0) >= PENDING_LIMIT) return err("limit");
 
@@ -216,6 +223,14 @@ async function adjustStock(env, items, sign) {
     const next = Math.max(0, cur + sign * it.quantity);
     if (it.variant_id) await turso(env, "UPDATE product_variants SET stock = ? WHERE id = ?", [next, it.variant_id]);
     else if (it.product_id) await turso(env, "UPDATE products SET stock = ? WHERE id = ?", [next, it.product_id]);
+  }
+}
+
+// Verifica que haya existencias suficientes SIN descontarlas (el descuento real ocurre al confirmar el pedido).
+async function checkStock(env, items) {
+  for (const it of items) {
+    const cur = await currentStock(env, it);
+    if (cur != null && cur < it.quantity) throw new StockError(it.variant_name || it.name);
   }
 }
 

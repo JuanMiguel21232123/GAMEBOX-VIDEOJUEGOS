@@ -130,8 +130,8 @@ $("#products").addEventListener("click", (e) => {
   if (!p || soldOut(p)) return;
   const sel = c.querySelector("select.variant");
   if (sel && !sel.value) { sel.classList.add("invalid"); sel.focus(); return; }
-  addToCart(p.id, sel ? sel.value : null);
-  btn.textContent = "Agregado ✓";
+  const added = addToCart(p.id, sel ? sel.value : null);
+  btn.textContent = added ? "Agregado ✓" : "Ya tienes el máximo";
   setTimeout(() => (btn.textContent = "Agregar al pedido"), 1200);
 });
 

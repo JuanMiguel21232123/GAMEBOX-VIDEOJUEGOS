@@ -81,6 +81,8 @@ const stockOf = (p, v) => (v ? v.stock : (variantsOf(p).length ? null : p.stock)
 
 // ---------- Mi pedido (carrito) ----------
 const MAX_QTY = 20;
+// Cuánto se puede pedir de un producto/variante: lo que haya en existencia (si se controla) o el tope general.
+const qtyLimit = (p, v) => { const s = stockOf(p, v); return s == null ? MAX_QTY : Math.max(0, Math.min(MAX_QTY, s)); };
 let cart = {};
 try { cart = JSON.parse(localStorage.getItem("urs-cart2") || "{}") || {}; } catch (e) { cart = {}; }
 const saveCart = () => { try { localStorage.setItem("urs-cart2", JSON.stringify(cart)); } catch (e) {} };
@@ -185,9 +187,14 @@ function renderCart() {
 
 function addToCart(pid, vid) {
   const k = keyOf(pid, vid);
-  cart[k] = Math.min((cart[k] || 0) + 1, MAX_QTY);
+  const p = products.find((x) => String(x.id) === String(pid));
+  const v = p && vid ? variantsOf(p).find((o) => String(o.id) === String(vid)) : null;
+  const limit = p ? qtyLimit(p, v) : MAX_QTY;
+  if ((cart[k] || 0) >= limit) return false; // ya está en el tope de existencias disponibles
+  cart[k] = (cart[k] || 0) + 1;
   saveCart();
   renderCart();
+  return true;
 }
 
 function openCart(open) {
@@ -201,7 +208,17 @@ $("#cart-items").addEventListener("click", (e) => {
   const btn = e.target.closest("button[data-act]");
   if (!btn) return;
   const k = btn.dataset.key;
-  if (btn.dataset.act === "plus") cart[k] = Math.min((cart[k] || 0) + 1, MAX_QTY);
+  if (btn.dataset.act === "plus") {
+    const line = resolveLine(k);
+    const limit = line ? qtyLimit(line.p, line.v) : MAX_QTY;
+    if ((cart[k] || 0) < limit) {
+      cart[k] = (cart[k] || 0) + 1;
+    } else if (line) {
+      const msg = $("#order-msg");
+      msg.dataset.state = "error";
+      msg.textContent = `Ya tienes la cantidad máxima disponible de "${line.v ? line.v.name : line.p.name}" (quedan ${limit}).`;
+    }
+  }
   if (btn.dataset.act === "minus") cart[k] = (cart[k] || 0) - 1;
   if (btn.dataset.act === "remove" || cart[k] <= 0) delete cart[k];
   saveCart();
@@ -247,6 +264,17 @@ $("#order-form").addEventListener("submit", async (e) => {
   e.preventDefault();
   const ls = lines(), msg = $("#order-msg"), btn = $("#order-submit");
   if (!ls.length) return;
+
+  // No se deja enviar el pedido si alguna línea pide más unidades de las que hay en existencia
+  for (const l of ls) {
+    const stock = stockOf(l.p, l.v);
+    if (stock != null && l.qty > stock) {
+      msg.dataset.state = "error";
+      msg.textContent = `Estás pidiendo ${l.qty} de "${l.v ? l.v.name : l.p.name}", pero solo quedan ${stock} disponibles. Ajusta la cantidad para poder enviar tu pedido.`;
+      return;
+    }
+  }
+
   btn.disabled = true;
   msg.dataset.state = "info";
   msg.textContent = "Enviando pedido...";
@@ -264,7 +292,11 @@ $("#order-form").addEventListener("submit", async (e) => {
   });
   if (error) {
     msg.dataset.state = "error";
-    msg.textContent = ORDER_ERRORS[(error.message || "").trim()] || "No se pudo enviar el pedido. Intenta de nuevo.";
+    const em = (error.message || "").trim();
+    const st = /^stock:(.+)$/.exec(em);
+    msg.textContent = st
+      ? `Ya no hay suficientes existencias de "${st[1]}" para tu pedido. Ajusta la cantidad e inténtalo de nuevo.`
+      : (ORDER_ERRORS[em] || "No se pudo enviar el pedido. Intenta de nuevo.");
     btn.disabled = false;
     return;
   }
