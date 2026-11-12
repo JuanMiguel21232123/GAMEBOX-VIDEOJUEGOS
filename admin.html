@@ -257,7 +257,7 @@
             <div class="field wide">
               <label for="p-stock">Existencias (unidades disponibles)</label>
               <input id="p-stock" type="number" min="0" step="1" inputmode="numeric" placeholder="Vacío = sin control de inventario">
-              <p class="muted small">Si el producto tiene tonos o variantes, las existencias se llevan en cada variante (este campo se ignora). Con 0 la tienda muestra "Agotado".</p>
+              <p class="muted small">Si el producto tiene variantes, las existencias se llevan en cada variante (este campo se ignora). Con 0 la tienda muestra "Agotado".</p>
             </div>
             <div class="field wide">
               <label for="p-image">Foto (JPG, PNG o WebP, máximo 50 MB; se optimiza sola al subirla)</label>
@@ -268,7 +268,7 @@
               </div>
             </div>
             <fieldset class="wide variants-box">
-              <legend>Tonos, tallas y variantes</legend>
+              <legend>Variantes del producto</legend>
               <p class="muted small">Para productos con varios modelos, capacidades o plataformas. Si dejas el precio de una variante vacío, se usa el precio del producto. Si no agregas ninguna, el producto se vende tal cual. En cada fila, "Existencias" vacío significa sin control de inventario.</p>
               <div id="variants-list" class="variants-list"></div>
               <div class="variants-actions">
@@ -317,7 +317,7 @@
             <div class="field wide">
               <label for="c-variant">Cómo se llaman sus variantes</label>
               <input id="c-variant" type="text" maxlength="30" list="c-variant-options" value="Opción">
-              <datalist id="c-variant-options"><option value="Sabor"><option value="Talla o color"><option value="Modelo"><option value="Color"><option value="Opción"></datalist>
+              <datalist id="c-variant-options"><option value="Modelo"><option value="Plataforma"><option value="Capacidad"><option value="Color"><option value="Edición"><option value="Opción"></datalist>
               <p class="muted small">Es la etiqueta del selector en la tienda (ej. "Plataforma" en juegos, "Capacidad" en consolas).</p>
             </div>
             <div class="form-actions wide">
@@ -344,7 +344,7 @@
             </div>
             <div class="field">
               <label for="sub-name">Nombre de la subsección</label>
-              <input id="sub-name" type="text" maxlength="60" placeholder="Ej. Desechables" required>
+              <input id="sub-name" type="text" maxlength="60" placeholder="Ej. PlayStation" required>
             </div>
             <button id="sub-save" class="btn solid" type="submit">Crear subsección</button>
           </form>

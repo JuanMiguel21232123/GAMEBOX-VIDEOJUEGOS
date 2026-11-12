@@ -159,7 +159,7 @@ input[type="color"] { height: 46px; padding: 4px; cursor: pointer; }
   .colors { grid-template-columns: 1fr; }
 }
 
-/* ---------- Variantes (sabores, tallas, colores) ---------- */
+/* ---------- Variantes (modelos, ediciones, colores) ---------- */
 .variants-box { border: 1px solid var(--line); padding: 16px 18px 18px; display: grid; gap: 14px; margin: 0; }
 .variants-box legend { padding: 0 10px; font: 700 1.15rem var(--serif); color: var(--gold-2); text-transform: uppercase; }
 .variants-list { display: grid; gap: 8px; }

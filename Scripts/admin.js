@@ -605,7 +605,7 @@ function addVariantRow(v = {}) {
   div.className = "variant-row";
   if (v.id) div.dataset.id = v.id;
   div.innerHTML = `
-    <input type="text" class="v-name" maxlength="80" placeholder="Nombre (ej. Rosa nude)" aria-label="Nombre del sabor o variante" value="${esc(v.name || "")}">
+    <input type="text" class="v-name" maxlength="80" placeholder="Nombre (ej. Edición de colección)" aria-label="Nombre de la variante" value="${esc(v.name || "")}">
     <input type="number" class="v-price" min="0" step="1" inputmode="numeric" placeholder="Precio propio" aria-label="Precio propio (opcional)" value="${v.price != null ? Number(v.price) : ""}">
     <input type="number" class="v-stock" min="0" step="1" inputmode="numeric" placeholder="Existencias" aria-label="Existencias (vacío = sin control)" value="${v.stock != null ? Number(v.stock) : ""}">
     <label class="check"><input type="checkbox" class="v-active"${v.active === false ? "" : " checked"}> Visible</label>
@@ -817,7 +817,7 @@ function addSaleRow() {
   div.className = "sale-row";
   div.innerHTML = `
     <select class="s-product" aria-label="Producto">${productOptionsHtml()}</select>
-    <select class="s-variant" aria-label="Sabor o variante" hidden></select>
+    <select class="s-variant" aria-label="Variante" hidden></select>
     <input type="number" class="s-qty" min="1" max="20" step="1" value="1" inputmode="numeric" aria-label="Cantidad">
     <input type="number" class="s-price" min="0" step="1" inputmode="numeric" placeholder="Precio c/u" aria-label="Precio cobrado por unidad">
     <button type="button" class="v-remove" aria-label="Quitar esta línea">✕</button>`;

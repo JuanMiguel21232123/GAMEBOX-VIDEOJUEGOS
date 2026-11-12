@@ -86,12 +86,6 @@ section.pad { padding: 20px 0 90px; }
 footer { padding: 40px 0 50px; border-top: 1px solid var(--line); text-align: center; color: var(--muted); font-size: .9rem; font-weight: 500; }
 footer .brand { display: block; margin-bottom: 8px; color: var(--text); }
 
-.gate { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 20px; background: rgba(3,4,10,.97); }
-.gate-box { max-width: 440px; text-align: center; padding: 44px 34px; border: 1px solid var(--gold); background: var(--surface); box-shadow: 0 0 40px color-mix(in srgb, var(--gold) 25%, transparent); }
-.gate-box h2 { font-size: 2rem; margin: 14px 0 12px; }
-.gate-box p { color: var(--muted); margin-bottom: 26px; font-size: .95rem; }
-.gate-box .btn + .btn { margin-left: 8px; }
-
 @media (max-width: 900px) {
   .blocks { grid-template-columns: 1fr; } .block { min-height: 0; }
   .visit { grid-template-columns: 1fr; padding: 30px 24px; } .visit .links { justify-content: flex-start; }

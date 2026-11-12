@@ -12,7 +12,7 @@ function setupHeader() {
     `<a class="tab" href="categoria.html?c=${encodeURIComponent(key)}" aria-current="${key === CAT}">${esc(c.title)}</a>`).join("");
 }
 
-const optionsWord = (n) => INFO.variant === "Sabor" ? (n === 1 ? "sabor" : "sabores") : (n === 1 ? "opción" : "opciones");
+const optionsWord = (n) => (n === 1 ? "opción" : "opciones");
 
 function priceLabel(p, vid) {
   const opts = variantsOf(p);

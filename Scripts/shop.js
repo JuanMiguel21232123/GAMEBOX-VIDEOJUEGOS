@@ -1,5 +1,5 @@
 // Lógica compartida por la portada y las páginas de categoría:
-// llamadas a /api/..., verificación de edad, personalización, productos con sabores y "Mi pedido".
+// llamadas a /api/..., personalización, productos con variantes y "Mi pedido".
 const API_OK = true; // antes dependía de si Supabase estaba configurado; ahora siempre lo está
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -70,7 +70,7 @@ async function loadSettings() {
   applySettings(data);
 }
 
-// ---------- Productos y sabores ----------
+// ---------- Productos y variantes ----------
 let products = []; // cada producto trae product_variants (solo las activas)
 const variantsOf = (p) => (p.product_variants || []).filter((v) => v.active);
 const unitPrice = (p, v) => (v && v.price != null ? v.price : p.price);
@@ -217,7 +217,7 @@ const ORDER_ERRORS = {
   payment: "Elige un método de pago.",
   items: "Revisa los productos de tu pedido.",
   invalid: "Algún producto ya no está disponible. Actualiza la página e inténtalo de nuevo.",
-  variant: "Algún sabor u opción ya no está disponible. Actualiza la página e inténtalo de nuevo.",
+  variant: "Alguna variante ya no está disponible. Actualiza la página e inténtalo de nuevo.",
   limit: "Ya tienes varios pedidos pendientes. Espera a que los confirmemos o escríbenos por WhatsApp.",
 };
 

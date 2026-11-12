@@ -1,8 +1,4 @@
--- Esquema para Turso, inferido a partir del código de functions/api/[[path]].js.
--- IMPORTANTE: no me pasaste el .sql real de tu plantilla; si ya tienes uno
--- (el que usas para "Para ellas" u otro proyecto con este mismo backend),
--- úsalo en su lugar y solo corre el INSERT de categorías que está al final.
--- Revísalo contra tu plantilla original antes de ejecutarlo en producción.
+-- Esquema de base de datos para Gamebox Videojuegos Manizales (Turso).
 
 CREATE TABLE IF NOT EXISTS admins (
   id            INTEGER PRIMARY KEY AUTOINCREMENT,
